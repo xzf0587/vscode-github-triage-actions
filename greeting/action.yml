@@ -1,0 +1,13 @@
+name: Issue Greeting
+description: generate an greeting comment for new issue
+inputs:
+  token:
+    description: GitHub token with issue, comment, and label read/write permissions
+    default: ${{ github.token }}
+  issue-message:
+    description: 'Comment to post on an individual''s first issue'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'index.js'
