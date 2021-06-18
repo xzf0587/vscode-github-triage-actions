@@ -6,10 +6,11 @@ const issueMessage = utils_1.getRequiredInput('issue-message');
 class Greeting extends Action_1.Action {
     constructor() {
         super(...arguments);
-        this.id = 'EnglishPlease';
+        this.id = 'Greeting';
     }
     async onOpened(issue) {
         await issue.postComment(issueMessage);
+        issue.getIssue;
     }
 }
 new Greeting().run(); // eslint-disable-line

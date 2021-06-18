@@ -5,10 +5,11 @@ import { getRequiredInput } from '../common/utils';
 const issueMessage = getRequiredInput('issue-message')
 
 class Greeting extends Action {
-	id = 'EnglishPlease'
+	id = 'Greeting'
 
 	async onOpened(issue: OctoKitIssue) {
 		await issue.postComment(issueMessage)
+		issue.getIssue
 	}
 }
 

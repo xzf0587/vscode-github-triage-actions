@@ -1,0 +1,13 @@
+name: Issue Milestoned
+description: generate an work item for milestoned issue
+inputs:
+  token:
+    description: GitHub token with issue, comment, and label read/write permissions
+    default: ${{ github.token }}
+  milestoneId:
+    description: 'the specific milestoneId'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'index.js'
