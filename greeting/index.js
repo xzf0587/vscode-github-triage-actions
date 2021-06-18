@@ -10,7 +10,6 @@ class Greeting extends Action_1.Action {
     }
     async onOpened(issue) {
         await issue.postComment(issueMessage);
-        issue.getIssue;
     }
 }
 new Greeting().run(); // eslint-disable-line

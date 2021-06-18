@@ -1,0 +1,19 @@
+name: Stale Issue Close
+description: close stale issue with specific label
+inputs:
+  token:
+    description: GitHub token with issue, comment, and label read/write permissions
+    default: ${{ github.token }}
+  label:
+    description: specific label to check 
+    required: true
+  close-days:
+    description: specific 
+    default: 7
+  close-message:
+    description: 'Comment to post on closing'
+    required: true
+
+runs:
+  using: 'node12'
+  main: 'index.js'

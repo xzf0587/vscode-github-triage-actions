@@ -9,7 +9,6 @@ class Greeting extends Action {
 
 	async onOpened(issue: OctoKitIssue) {
 		await issue.postComment(issueMessage)
-		issue.getIssue
 	}
 }
 
