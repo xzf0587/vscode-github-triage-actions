@@ -1,8 +1,8 @@
 import { OctoKitIssue } from '../api/octokit'
 import { Action } from '../common/Action'
-import { getRequiredInput, safeLog } from '../common/utils';
+import { getRequiredInput, safeLog } from '../common/utils'
 
-const milestoneId = +getRequiredInput('milestoneId') 
+const milestoneId = +getRequiredInput('milestoneId')
 
 class Milestoned extends Action {
 	id = 'Milestoned'

@@ -8,10 +8,11 @@ const closeMessage = utils_1.getRequiredInput('close-message');
 class Stale extends Action_1.Action {
     constructor() {
         super(...arguments);
-        this.id = 'Greeting';
+        this.id = 'Stale';
     }
     async onTriggered(github) {
-        const query = `label:"${label}" is:open is:unlocked`;
+        const updatedTimestamp = utils_1.daysAgoToHumanReadbleDate(closeDays);
+        const query = `updated:<${updatedTimestamp} label:"${label}" is:open is:unlocked`;
         for await (const page of github.query({ q: query })) {
             for (const issue of page) {
                 const hydrated = await issue.getIssue();
@@ -20,36 +21,24 @@ class Stale extends Action_1.Action {
                     throw Error('Unexpected comment data');
                 }
                 const lastComment = lastCommentIterator.value[0];
-                if (hydrated.open &&
-                    hydrated.labels.includes(label)) {
+                if (hydrated.open && hydrated.labels.includes(label)) {
                     if (!lastComment) {
-                        if (lastComment) {
-                            utils_1.safeLog(`Last comment on ${hydrated.number} by team. Closing.`);
-                        }
-                        else {
-                            utils_1.safeLog(`No comments on ${hydrated.number}. Closing.`);
-                        }
+                        utils_1.safeLog(`No comments on ${hydrated.number}. Closing.`);
                         if (closeMessage) {
                             await issue.postComment(closeMessage);
                         }
                         await issue.closeIssue();
                     }
                     else {
-                        if (true) {
-                            utils_1.safeLog(`Last comment on ${hydrated.number} by ${lastComment.author}.`);
-                            await issue.closeIssue();
+                        utils_1.safeLog(`Last comment on ${hydrated.number} by ${lastComment.author.name}.`);
+                        if (closeMessage) {
+                            await issue.postComment(closeMessage);
                         }
-                        else {
-                            // safeLog(
-                            // 	`Last comment on ${hydrated.number} by rando. Skipping.${
-                            // 		hydrated.assignee ? ' cc @' + hydrated.assignee : ''
-                            // 	}`,
-                            // )
-                        }
+                        await issue.closeIssue();
                     }
                 }
                 else {
-                    // safeLog('Query returned an invalid issue:' + hydrated.number)
+                    utils_1.safeLog('Query returned an invalid issue:' + hydrated.number);
                 }
             }
         }
