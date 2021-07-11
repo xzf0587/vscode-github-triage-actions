@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core = require("@actions/core");
 const github_1 = require("@actions/github");
 const axios_1 = require("axios");
+const fs = require("fs-extra");
 const octokit_1 = require("../api/octokit");
 exports.getInput = (name) => core.getInput(name) || undefined;
 exports.getRequiredInput = (name) => core.getInput(name, { required: true });
@@ -102,4 +103,7 @@ exports.safeLog = (message, ...args) => {
     const clean = (val) => ('' + val).replace(/:|#/g, '');
     console.log(clean(message), ...args.map(clean));
 };
+exports.getAccounts = (() => {
+    return fs.readJsonSync('../resource/accounts.json');
+})();
 //# sourceMappingURL=utils.js.map

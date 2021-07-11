@@ -6,6 +6,7 @@
 import * as core from '@actions/core'
 import { context, GitHub } from '@actions/github'
 import axios from 'axios'
+import * as fs from 'fs-extra'
 import { OctoKitIssue } from '../api/octokit'
 
 export const getInput = (name: string) => core.getInput(name) || undefined
@@ -124,3 +125,7 @@ export const safeLog = (message: string, ...args: (string | number | string[])[]
 	const clean = (val: any) => ('' + val).replace(/:|#/g, '')
 	console.log(clean(message), ...args.map(clean))
 }
+
+export const getAccounts = (() => {
+	return fs.readJsonSync('../resource/accounts.json')
+})()
