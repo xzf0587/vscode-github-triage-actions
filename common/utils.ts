@@ -127,5 +127,5 @@ export const safeLog = (message: string, ...args: (string | number | string[])[]
 }
 
 export const getAccounts = (() => {
-	return fs.readJsonSync('../resource/accounts.json')
+	return fs.readJsonSync('resource/accounts.json')
 })()

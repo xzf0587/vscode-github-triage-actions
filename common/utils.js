@@ -104,6 +104,6 @@ exports.safeLog = (message, ...args) => {
     console.log(clean(message), ...args.map(clean));
 };
 exports.getAccounts = (() => {
-    return fs.readJsonSync('../resource/accounts.json');
+    return fs.readJsonSync('resource/accounts.json');
 })();
 //# sourceMappingURL=utils.js.map
