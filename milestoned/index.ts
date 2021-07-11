@@ -10,7 +10,7 @@ class Milestoned extends Action {
 	async onMilestoned(issue: OctoKitIssue) {
 		const content = await issue.getIssue()
 		if (content.milestoneId === milestoneId) {
-			const accounts = getAccounts()
+			const accounts = getAccounts
 			safeLog(`got a milestoned ${content.milestoneId} ${accounts.x} issue`)
 		}
 	}

@@ -11,7 +11,7 @@ class Milestoned extends Action_1.Action {
     async onMilestoned(issue) {
         const content = await issue.getIssue();
         if (content.milestoneId === milestoneId) {
-            const accounts = utils_1.getAccounts();
+            const accounts = utils_1.getAccounts;
             utils_1.safeLog(`got a milestoned ${content.milestoneId} ${accounts.x} issue`);
         }
     }
